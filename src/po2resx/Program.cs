@@ -33,10 +33,13 @@ public class Program
                 new XElement("value", "System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"))
         );
         
-        foreach (var entry in translations)
-        {
-            resx.Add(new XElement("data", new XAttribute("name", entry.Key), new XAttribute("xml:space", "preserve"),
-                new XElement("value", entry.Value)));
+        foreach (var entry in translations) {
+            XAttribute nameAttribute = new("name", entry.Key);
+            XAttribute spaceAttribute = new(XNamespace.Xml + "space", "preserve");
+            XElement valueElement = new("value", entry.Value);
+            XElement dataElement = new("data", nameAttribute, spaceAttribute, valueElement);
+
+            resx.Add(dataElement);
         }
 
         var resxDoc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), resx);
