@@ -8,7 +8,7 @@ public class Program
     {
         if (args.Length != 2)
         {
-            Console.WriteLine("Usage: potoresx <input.po> <output.resx>");
+            Console.WriteLine("Usage: po2resx <input.po> <output.resx>");
             return;
         }
 
