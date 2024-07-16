@@ -40,7 +40,8 @@ public class Program
 
             XAttribute nameAttribute = new("name", entry.Key);
             XAttribute spaceAttribute = new(XNamespace.Xml + "space", "preserve");
-            XElement valueElement = new("value", entry.Value);
+            string value = string.IsNullOrWhiteSpace (entry.Value) ? entry.Key : entry.Value;
+            XElement valueElement = new("value", value);
             XElement dataElement = new("data", nameAttribute, spaceAttribute, valueElement);
 
             resx.Add(dataElement);
