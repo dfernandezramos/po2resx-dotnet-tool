@@ -15,8 +15,7 @@ public class Program
         string inputFilePath = args[0];
         string outputFilePath = args[1];
 
-        var parser = new PoParser();
-        var translations = parser.Parse(inputFilePath);
+        var translations = PoParser.Parse(inputFilePath);
         GenerateResxFile(translations, outputFilePath);
     }
 

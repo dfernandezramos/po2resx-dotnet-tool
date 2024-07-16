@@ -8,7 +8,7 @@ public class PoParser
     /// </summary>
     /// <param name="filePath">The path of the PO file.</param>
     /// <returns>A dictionary with the strings and Ids extracted from the PO file.</returns>
-    public Dictionary<string, string> Parse(string filePath)
+    public static Dictionary<string, string> Parse(string filePath)
     {
         var translations = new Dictionary<string, string>();
         string[] lines = File.ReadAllLines(filePath);
