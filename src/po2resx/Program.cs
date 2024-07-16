@@ -34,6 +34,10 @@ public class Program
         );
         
         foreach (var entry in translations) {
+            if (string.IsNullOrWhiteSpace (entry.Key)) {
+                continue;
+            }
+
             XAttribute nameAttribute = new("name", entry.Key);
             XAttribute spaceAttribute = new(XNamespace.Xml + "space", "preserve");
             XElement valueElement = new("value", entry.Value);
