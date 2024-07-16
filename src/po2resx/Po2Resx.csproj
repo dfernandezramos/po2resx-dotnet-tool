@@ -6,7 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>potoresx</ToolCommandName>
+    <ToolCommandName>po2resx</ToolCommandName>
+    <AssemblyName>Po2Resx</AssemblyName>
+    <RootNamespace>Po2Resx</RootNamespace>
   </PropertyGroup>
 
 </Project>
