@@ -22,7 +22,7 @@ public class Program
 
     static void GenerateResxFile(Dictionary<string, string> translations, string filePath)
     {
-        var resx = new XElement("root",
+        XElement resx = new("root",
             new XElement("resheader", new XAttribute("name", "resmimetype"),
                 new XElement("value", "text/microsoft-resx")),
             new XElement("resheader", new XAttribute("name", "version"),
@@ -42,7 +42,7 @@ public class Program
             resx.Add(dataElement);
         }
 
-        var resxDoc = new XDocument(new XDeclaration("1.0", "utf-8", "yes"), resx);
+        XDocument resxDoc = new(new XDeclaration("1.0", "utf-8", "yes"), resx);
         resxDoc.Save(filePath);
     }
 }
