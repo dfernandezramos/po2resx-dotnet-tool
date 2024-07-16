@@ -14,11 +14,21 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## Installation
 
+### Local installation
+
 To install `po2resx` as a global tool, first clone the repository and navigate to the project directory. Then, run the following commands:
 
 ```sh
 dotnet pack --configuration Release
 dotnet tool install --global --add-source ./bin/Release net8.0/PoToResxTool
+```
+
+### dotnet tool installation
+
+To install `po2resx` as a global tool, run the following command:
+
+```sh
+dotnet tool install po2resx-dotnet-tool -g
 ```
 
 ## Usage
