@@ -11,4 +11,23 @@
     <RootNamespace>Po2Resx</RootNamespace>
   </PropertyGroup>
 
+  <PropertyGroup>
+    <PackageId>Po2Resx-dotnet-tool</PackageId>
+    <Version>1.0.0</Version>
+    <Authors>David Fernández Ramos</Authors>
+    <Product>Po2Resx</Product>
+    <Description>A .NET global tool to convert PO files to RESX files.</Description>
+    <PackageTags>PO, RESX, Localization, Global Tool</PackageTags>
+    <PackageProjectUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</PackageProjectUrl>
+    <RepositoryUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</RepositoryUrl>
+    <RepositoryType>git</RepositoryType>
+    <PackageLicenseFile>LICENSE</PackageLicenseFile>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
+    <None Include="..\..\LICENSE" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
 </Project>
