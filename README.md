@@ -2,6 +2,10 @@
 
 `po2resx` is a .NET global tool that converts PO (Portable Object) files to RESX (Resource) files. This tool is useful for .NET developers who need to manage localization and internationalization in their projects.
 
+## License
+
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+
 ## Features
 
 - Parses PO files and extracts translations.
