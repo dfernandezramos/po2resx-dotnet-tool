@@ -1,0 +1,20 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: MyApp\n"
+"POT-Creation-Date: 2024-07-17 19:00:49+0200\n"
+"PO-Revision-Date: 2024-07-17 19:00:49+0200\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: GetText.NET Extractor\n"
+
+#: ..\src\MyApp.Resources\Locale\Strings.cs:22
+msgid "Hello there"
+msgstr "Hola"
+
+#: ..\src\MyApp.Resources\Locale\Strings.cs:23
+msgid "Sayonara baby"
+msgstr "Hasta la vista baby"
+
