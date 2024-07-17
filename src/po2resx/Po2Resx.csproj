@@ -9,6 +9,7 @@
     <ToolCommandName>po2resx</ToolCommandName>
     <AssemblyName>Po2Resx</AssemblyName>
     <RootNamespace>Po2Resx</RootNamespace>
+    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
   </PropertyGroup>
 
   <PropertyGroup>
