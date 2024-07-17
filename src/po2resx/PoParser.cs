@@ -1,6 +1,9 @@
 namespace Po2Resx;
 
-public class PoParser
+/// <summary>
+/// This class contains the implementation of a PO file parser.
+/// </summary>
+public static class PoParser
 {
     /// <summary>
     /// This method parses the content of a PO file given its file path and returns a dictionary with
@@ -14,7 +17,7 @@ public class PoParser
         string[] lines = File.ReadAllLines(filePath);
         string? key = null;
 
-        foreach (var line in lines)
+        foreach (string line in lines)
         {
             if (line.StartsWith("msgid "))
             {
@@ -22,13 +25,11 @@ public class PoParser
             }
             else if (line.StartsWith("msgstr "))
             {
-                string? value = line.Substring(8, line.Length - 9);
+                string value = line.Substring(8, line.Length - 9);
 
-                if (key != null && value != null)
+                if (!string.IsNullOrEmpty(key))
                 {
                     translations[key] = value;
-                    key = null;
-                    value = null;
                 }
             }
         }
