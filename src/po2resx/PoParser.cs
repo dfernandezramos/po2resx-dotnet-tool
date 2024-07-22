@@ -27,10 +27,15 @@ public static class PoParser
             {
                 string value = line.Substring(8, line.Length - 9);
 
-                if (!string.IsNullOrEmpty(key))
-                {
-                    translations[key] = value;
+                if (string.IsNullOrEmpty (key)) {
+                    continue;
                 }
+
+                if (string.IsNullOrEmpty(value)) {
+                    value = key;
+                }
+
+                translations[key] = value;
             }
         }
 
