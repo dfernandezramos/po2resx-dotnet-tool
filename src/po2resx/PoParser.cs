@@ -21,17 +21,19 @@ public static class PoParser
         {
             if (line.StartsWith("msgid "))
             {
-                key = line.Substring(7, line.Length - 8); // Remove 'msgid "' and the trailing '"'
+                key = line[7..^1]; // Remove 'msgid "' and the trailing '"'
             }
             else if (line.StartsWith("msgstr "))
             {
-                string value = line.Substring(8, line.Length - 9);
+                string value = line[8..^1];
 
-                if (string.IsNullOrEmpty (key)) {
+                if (string.IsNullOrEmpty(key))
+                {
                     continue;
                 }
 
-                if (string.IsNullOrEmpty(value)) {
+                if (string.IsNullOrEmpty(value))
+                {
                     value = key;
                 }
 
