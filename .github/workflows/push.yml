@@ -9,23 +9,11 @@ jobs:
   Po2Resx-build:
     runs-on: windows-latest
     steps:
-      - name: Check out repository code
+      - name: Clone repository
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-      - name: Build project
-        working-directory: ${{ github.workspace }}
-        run: |
-          dotnet build -c Release
-      - name: Check format
-        working-directory: ${{ github.workspace }}
-        run: |
-          dotnet format --severity info --verify-no-changes
-      - name: Test project
-        working-directory: ${{ github.workspace }}
-        run: |
-          dotnet test -c Release -v quiet -l "console;verbosity=normal"
-      - name: Pack project
-        working-directory: ${{ github.workspace }}
-        run: |
-          dotnet pack -c Release
+      - name: Build
+        uses: ./.github/actions/build-action
+      - name: Test
+        uses: ./.github/actions/test-action

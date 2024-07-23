@@ -1,0 +1,15 @@
+name: build-action
+description: build action
+runs:
+  using: composite
+  steps:
+    - name: Build project
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        dotnet build -c Release
+    - name: Pack project
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        dotnet pack -c Release
