@@ -1,0 +1,16 @@
+name: GitHub Actions push workflow
+run-name: ${{ github.actor }} push CI
+on:
+  pull_request:
+jobs:
+  Po2Resx-build:
+    runs-on: windows-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - name: Build
+        uses: ./.github/actions/build-action
+      - name: Test
+        uses: ./.github/actions/test-action
