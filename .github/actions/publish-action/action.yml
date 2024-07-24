@@ -1,0 +1,31 @@
+name: publish-action
+description: publish action
+inputs:
+  pkg-path:
+    description: 'NuGet package path'
+    required: true
+  pkg-source:
+    description: 'NuGet source'
+    required: true
+  api-key:
+    description: 'Source API key'
+    required: true
+runs:
+  using: composite
+  steps:
+    - name: Pack project
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        dotnet pack -c Release -o $PKG_PATH
+      env:
+        PKG_PATH: ${{ inputs.pkg-path }}
+    - name: Publish NuGet package
+      shell: bash
+      working-directory: ${{ github.workspace }}
+      run: |
+        dotnet nuget push $PKG_PATH --source $PKG_SOURCE --api-key $API_KEY
+      env:
+        PKG_PATH: ${{ inputs.pkg-path }}
+        PKG_SOURCE: ${{ inputs.pkg-source }}
+        API_KEY: ${{ inputs.api-key }}
