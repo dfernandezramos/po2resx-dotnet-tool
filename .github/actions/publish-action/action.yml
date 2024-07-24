@@ -17,7 +17,7 @@ runs:
       shell: bash
       working-directory: ${{ github.workspace }}
       run: |
-        dotnet pack -c Release -o $PKG_PATH
+        dotnet pack -c Release
       env:
         PKG_PATH: ${{ inputs.pkg-path }}
     - name: Publish NuGet package

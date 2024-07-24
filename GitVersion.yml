@@ -1,0 +1,19 @@
+assembly-versioning-scheme: MajorMinorPatch
+assembly-file-versioning-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource ?? 0}'
+assembly-versioning-format: '{Major}.{Minor}.{Patch}.{CommitsSinceVersionSource ?? 0}'
+mode: ContinuousDeployment
+ignore:
+  sha: []
+merge-message-formats: {}
+branches:
+  release:
+    regex: release
+    mode: ContinuousDeployment
+    label: 'release'
+    increment: Patch
+    prevent-increment:
+      of-merged-branch: true
+    track-merge-target: false
+    tracks-release-branches: true
+    is-release-branch: true
+    is-main-branch: false

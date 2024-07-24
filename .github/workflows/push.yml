@@ -17,10 +17,18 @@ jobs:
         uses: ./.github/actions/build-action
       - name: Test
         uses: ./.github/actions/test-action
+      - name: Install GitVersion
+        uses: gittools/actions/gitversion/setup@v2.0.1
+        with:
+          versionSpec: '6.0.0'
+      - name: Get assembly version
+        uses: gittools/actions/gitversion/execute@v2.0.1
+        with:
+          useConfigFile: true
       - name: Pack and publish NuGet
         if: github.ref == 'refs/heads/release'
         uses: ./.github/actions/publish-action
         with:
-          pkg-path: ${{ github.workspace }}/Po2Resx.nupkg
+          pkg-path: ${{ github.workspace }}\src\Po2Resx\bin\Release\Po2Resx-dotnet-tool.${{ env.FullSemVer }}.nupkg
           pkg-source: 'https://api.nuget.org/v3/index.json'
           api-key: ${{ secrets.NUGET_API_KEY }}
