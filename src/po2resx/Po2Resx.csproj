@@ -14,7 +14,7 @@
 
   <PropertyGroup>
     <PackageId>Po2Resx-dotnet-tool</PackageId>
-    <Version>1.0.0</Version>
+    <Version>1.0.1</Version>
     <Authors>David Fernández Ramos</Authors>
     <Product>Po2Resx</Product>
     <Description>A .NET global tool to convert PO files to RESX files.</Description>
