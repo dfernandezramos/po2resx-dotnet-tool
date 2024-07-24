@@ -14,7 +14,6 @@
 
   <PropertyGroup>
     <PackageId>Po2Resx-dotnet-tool</PackageId>
-    <Version>1.0.1</Version>
     <Authors>David Fernández Ramos</Authors>
     <Product>Po2Resx</Product>
     <Description>A .NET global tool to convert PO files to RESX files.</Description>
@@ -27,6 +26,13 @@
     <PackageIcon>icon.png</PackageIcon>
     <PackageIconUrl>https://raw.githubusercontent.com/dfernandezramos/po2resx-dotnet-tool/master/icon.png</PackageIconUrl>
   </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GitVersion.MsBuild" Version="6.0.0">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+  </ItemGroup>
 
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
