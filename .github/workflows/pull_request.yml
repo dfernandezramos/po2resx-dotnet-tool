@@ -1,5 +1,5 @@
-name: GitHub Actions push workflow
-run-name: ${{ github.actor }} push CI
+name: GitHub Actions pull request workflow
+run-name: ${{ github.actor }} pull request CI
 on:
   pull_request:
 jobs:
