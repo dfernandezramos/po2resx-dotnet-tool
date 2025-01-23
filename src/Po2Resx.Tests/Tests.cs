@@ -44,7 +44,29 @@ public class Tests
         Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
 
         // Then
-        Assert.That(translations, Has.Count.EqualTo(2));
+        Assert.That(translations, Has.Count.EqualTo(4));
+        foreach (KeyValuePair<string, string> translation in translations)
+        {
+            Assert.That(translation.Key, Is.Not.EqualTo(translation.Value));
+        }
+    }
+
+    [Test]
+    public void ParsePOFile_ComplexPOFile_TranslationsParsed()
+    {
+        // Given
+        string inputFilePath = Path.Join("data", "complex.po");
+        string expectedKey =
+            "Placeholder {0}\\nLine break/s\\nMarkups <a href=\\\"{2}\\\">Click here</a>";
+        string expectedValue =
+            "Plantilla {0}\\nSalto de línea/s\\nCódigo de marcas <a href=\\\"{2}\\\">Pulsa aquí</a>";
+
+        // When
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+
+        // Then
+        Assert.That(translations, Has.Count.EqualTo(1));
+        Assert.That(translations[expectedKey], Is.EqualTo(expectedValue));
     }
 
     [Test]
@@ -71,6 +93,10 @@ public class Tests
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(2));
+        foreach (KeyValuePair<string, string> translation in translations)
+        {
+            Assert.That(translation.Key, Is.EqualTo(translation.Value));
+        }
     }
 
     [Test]
