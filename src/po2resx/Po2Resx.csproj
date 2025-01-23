@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>po2resx</ToolCommandName>
+    <ToolCommandName>dotnet-po2resx</ToolCommandName>
     <AssemblyName>Po2Resx</AssemblyName>
     <RootNamespace>Po2Resx</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>

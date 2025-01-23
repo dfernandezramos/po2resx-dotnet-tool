@@ -34,5 +34,5 @@ dotnet tool install po2resx-dotnet-tool -g
 ## Usage
 
 ```sh
-po2resx <input.po> <output.resx>
+dotnet po2resx <input.po> <output.resx>
 ```
