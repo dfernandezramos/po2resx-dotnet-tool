@@ -16,31 +16,66 @@ public static class PoParser
         var translations = new Dictionary<string, string>();
         string[] lines = File.ReadAllLines(filePath);
         string? key = null;
+        string? value = null;
+        bool isMsgId = false;
+        bool isMsgStr = false;
 
         foreach (string line in lines)
         {
-            if (line.StartsWith("msgid "))
+            if (string.IsNullOrWhiteSpace(line) || line.StartsWith('#'))
             {
-                key = line[7..^1]; // Remove 'msgid "' and the trailing '"'
+                continue;
             }
-            else if (line.StartsWith("msgstr "))
-            {
-                string value = line[8..^1];
 
-                if (string.IsNullOrEmpty(key))
+            if (line.StartsWith("msgid"))
+            {
+                if (!string.IsNullOrEmpty(key) && value != null)
                 {
-                    continue;
+                    if (string.IsNullOrEmpty(value))
+                    {
+                        value = key;
+                    }
+
+                    translations[key] = value;
                 }
 
-                if (string.IsNullOrEmpty(value))
-                {
-                    value = key;
-                }
-
-                translations[key] = value;
+                key = line[7..^1]; // Remove 'msgid "' and trailing quotes
+                value = null;
+                isMsgId = true;
+                isMsgStr = false;
             }
+            else if (line.StartsWith("msgstr"))
+            {
+                value = line[8..^1]; // Remove 'msgstr "' and trailing quotes
+                isMsgId = false;
+                isMsgStr = true;
+            }
+            else if (line.StartsWith('\"'))
+            {
+                // Remove opening and trailing quotes
+                if (isMsgId && key != null)
+                {
+                    key += line[1..^1];
+                }
+                else if (isMsgStr && value != null)
+                {
+                    value += line[1..^1];
+                }
+            }
+        }
+
+        // Save last key-value pair if any
+        if (!string.IsNullOrEmpty(key) && value != null)
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                value = key;
+            }
+
+            translations[key] = value;
         }
 
         return translations;
     }
+
 }
