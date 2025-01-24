@@ -17,7 +17,7 @@
     <Authors>David Fernández Ramos</Authors>
     <Product>Po2Resx</Product>
     <Description>A .NET global tool to convert PO files to RESX files.</Description>
-    <PackageTags>PO, RESX, Localization, Global Tool</PackageTags>
+    <PackageTags>PO, POT, RESX, Localization, Global Tool</PackageTags>
     <PackageProjectUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

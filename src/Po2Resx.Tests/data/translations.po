@@ -33,3 +33,7 @@ msgid "This is another"
 msgstr "Este es otro"
 "texto traducido"
 "en varias líneas"
+
+#: ..\src\MyApp.Resources\Locale\Strings.cs:26
+msgid "Pending translation"
+msgstr ""

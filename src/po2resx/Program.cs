@@ -13,7 +13,16 @@ public class Program
         string inputFilePath = args[0];
         string outputFilePath = args[1];
 
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        if (!File.Exists(inputFilePath))
+        {
+            Console.WriteLine($"Source file {inputFilePath} does not exist.");
+            return;
+        }
+
+        bool isTemplateFile = Path.GetExtension(inputFilePath) == ".pot";
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, isTemplateFile);
+        Console.WriteLine($"{translations.Count} translations detected.");
         ResxGenerator.GenerateResxFile(translations, outputFilePath);
+        Console.WriteLine($"Resource file {outputFilePath} generated.");
     }
 }
