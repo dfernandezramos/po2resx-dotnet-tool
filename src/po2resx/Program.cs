@@ -6,7 +6,14 @@ public class Program
     {
         if (args.Length != 2)
         {
-            Console.WriteLine("Usage: po2resx <input.po> <output.resx>");
+            Console.WriteLine("Usage: po2resx <input.po/pot> <output.resx>");
+            return;
+        }
+
+        if (args[0] == "-h" || args[0] == "--help" || args[0] == "/h" || args[0] == "/help")
+        {
+            HelpWriter help = new();
+            help.Write();
             return;
         }
 
