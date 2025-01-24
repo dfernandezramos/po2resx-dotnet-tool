@@ -31,7 +31,7 @@ public class Tests
         string inputFilePath = Path.Join("data", "unexisting.po");
 
         // When & Then
-        Assert.Throws<FileNotFoundException>(() => PoParser.Parse(inputFilePath));
+        Assert.Throws<FileNotFoundException>(() => PoParser.Parse(inputFilePath, false));
     }
 
     [Test]
@@ -41,7 +41,7 @@ public class Tests
         string inputFilePath = Path.Join("data", "translations.po");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(4));
@@ -62,7 +62,7 @@ public class Tests
             "Plantilla {0}\\nSalto de línea/s\\nCódigo de marcas <a href=\\\"{2}\\\">Pulsa aquí</a>";
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(1));
@@ -76,7 +76,20 @@ public class Tests
         string inputFilePath = Path.Join("data", "empty.po");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
+
+        // Then
+        Assert.That(translations, Has.Count.EqualTo(0));
+    }
+
+    [Test]
+    public void ParsePOFile_EmptyPOTFile_EmptyResultReturned()
+    {
+        // Given
+        string inputFilePath = Path.Join("data", "empty.pot");
+
+        // When
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(0));
@@ -89,7 +102,7 @@ public class Tests
         string inputFilePath = Path.Join("data", "translations_template.pot");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(2));
@@ -104,7 +117,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "translations.po");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);
@@ -119,7 +132,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "empty.po");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);
@@ -137,7 +150,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "translations_template.pot");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);

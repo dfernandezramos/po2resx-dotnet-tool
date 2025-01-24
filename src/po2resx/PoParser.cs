@@ -6,12 +6,13 @@ namespace Po2Resx;
 public static class PoParser
 {
     /// <summary>
-    /// This method parses the content of a PO file given its file path and returns a dictionary with
+    /// This method parses the content of a PO/POT file given its file path and returns a dictionary with
     /// the translations inside of it.
     /// </summary>
-    /// <param name="filePath">The path of the PO file.</param>
-    /// <returns>A dictionary with the strings and Ids extracted from the PO file.</returns>
-    public static Dictionary<string, string> Parse(string filePath)
+    /// <param name="filePath">The path of the PO/POT file.</param>
+    /// <param name="isTemplateFile">A value indicating whether the file is POT or not.</param>
+    /// <returns>A dictionary with the strings and Ids extracted from the PO/POT file.</returns>
+    public static Dictionary<string, string> Parse(string filePath, bool isTemplateFile)
     {
         var translations = new Dictionary<string, string>();
         string[] lines = File.ReadAllLines(filePath);
@@ -29,16 +30,7 @@ public static class PoParser
 
             if (line.StartsWith("msgid"))
             {
-                if (!string.IsNullOrEmpty(key) && value != null)
-                {
-                    if (string.IsNullOrEmpty(value))
-                    {
-                        value = key;
-                    }
-
-                    translations[key] = value;
-                }
-
+                RegisterTranslation(translations, key, value, isTemplateFile);
                 key = line[7..^1]; // Remove 'msgid "' and trailing quotes
                 value = null;
                 isMsgId = true;
@@ -65,17 +57,25 @@ public static class PoParser
         }
 
         // Save last key-value pair if any
-        if (!string.IsNullOrEmpty(key) && value != null)
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                value = key;
-            }
-
-            translations[key] = value;
-        }
+        RegisterTranslation(translations, key, value, isTemplateFile);
 
         return translations;
     }
 
+    static void RegisterTranslation(Dictionary<string, string> translations, string? key, string? value, bool isTemplateFile)
+    {
+        if (string.IsNullOrEmpty(key))
+        {
+            return;
+        }
+
+        if (isTemplateFile)
+        {
+            translations[key] = key;
+        }
+        else if (!string.IsNullOrEmpty(value))
+        {
+            translations[key] = value;
+        }
+    }
 }
