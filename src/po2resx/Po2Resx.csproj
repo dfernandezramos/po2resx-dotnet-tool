@@ -6,7 +6,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <PackAsTool>true</PackAsTool>
-    <ToolCommandName>po2resx</ToolCommandName>
+    <ToolCommandName>dotnet-po2resx</ToolCommandName>
     <AssemblyName>Po2Resx</AssemblyName>
     <RootNamespace>Po2Resx</RootNamespace>
     <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
@@ -17,7 +17,7 @@
     <Authors>David Fernández Ramos</Authors>
     <Product>Po2Resx</Product>
     <Description>A .NET global tool to convert PO files to RESX files.</Description>
-    <PackageTags>PO, RESX, Localization, Global Tool</PackageTags>
+    <PackageTags>PO, POT, RESX, Localization, Global Tool</PackageTags>
     <PackageProjectUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</PackageProjectUrl>
     <RepositoryUrl>https://github.com/dfernandezramos/po2resx-dotnet-tool</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
@@ -38,6 +38,11 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\"/>
     <None Include="..\..\LICENSE" Pack="true" PackagePath="\"/>
     <None Include="..\..\icon.png" Pack="true" PackagePath="\"/>
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="help.md" />
+    <EmbeddedResource Include="help.md" />
   </ItemGroup>
 
 </Project>

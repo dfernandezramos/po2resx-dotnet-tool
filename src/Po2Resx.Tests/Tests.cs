@@ -31,7 +31,7 @@ public class Tests
         string inputFilePath = Path.Join("data", "unexisting.po");
 
         // When & Then
-        Assert.Throws<FileNotFoundException>(() => PoParser.Parse(inputFilePath));
+        Assert.Throws<FileNotFoundException>(() => PoParser.Parse(inputFilePath, false));
     }
 
     [Test]
@@ -41,10 +41,32 @@ public class Tests
         string inputFilePath = Path.Join("data", "translations.po");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // Then
-        Assert.That(translations, Has.Count.EqualTo(2));
+        Assert.That(translations, Has.Count.EqualTo(4));
+        foreach (KeyValuePair<string, string> translation in translations)
+        {
+            Assert.That(translation.Key, Is.Not.EqualTo(translation.Value));
+        }
+    }
+
+    [Test]
+    public void ParsePOFile_ComplexPOFile_TranslationsParsed()
+    {
+        // Given
+        string inputFilePath = Path.Join("data", "complex.po");
+        string expectedKey =
+            "Placeholder {0}\\nLine break/s\\nMarkups <a href=\\\"{2}\\\">Click here</a>";
+        string expectedValue =
+            "Plantilla {0}\\nSalto de línea/s\\nCódigo de marcas <a href=\\\"{2}\\\">Pulsa aquí</a>";
+
+        // When
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
+
+        // Then
+        Assert.That(translations, Has.Count.EqualTo(1));
+        Assert.That(translations[expectedKey], Is.EqualTo(expectedValue));
     }
 
     [Test]
@@ -54,7 +76,20 @@ public class Tests
         string inputFilePath = Path.Join("data", "empty.po");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
+
+        // Then
+        Assert.That(translations, Has.Count.EqualTo(0));
+    }
+
+    [Test]
+    public void ParsePOFile_EmptyPOTFile_EmptyResultReturned()
+    {
+        // Given
+        string inputFilePath = Path.Join("data", "empty.pot");
+
+        // When
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(0));
@@ -67,10 +102,14 @@ public class Tests
         string inputFilePath = Path.Join("data", "translations_template.pot");
 
         // When
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // Then
         Assert.That(translations, Has.Count.EqualTo(2));
+        foreach (KeyValuePair<string, string> translation in translations)
+        {
+            Assert.That(translation.Key, Is.EqualTo(translation.Value));
+        }
     }
 
     [Test]
@@ -78,7 +117,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "translations.po");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);
@@ -93,7 +132,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "empty.po");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, false);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);
@@ -111,7 +150,7 @@ public class Tests
     {
         // Given
         string inputFilePath = Path.Join("data", "translations_template.pot");
-        Dictionary<string, string> translations = PoParser.Parse(inputFilePath);
+        Dictionary<string, string> translations = PoParser.Parse(inputFilePath, true);
 
         // When
         ResxGenerator.GenerateResxFile(translations, _outputFilePath);

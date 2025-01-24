@@ -18,3 +18,22 @@ msgstr "Hola"
 msgid "Sayonara baby"
 msgstr "Hasta la vista baby"
 
+#: .././MyApp/Resources/Strings.cs:24
+msgid ""
+"This is a text translated"
+"in different lines"
+msgstr ""
+"Esto es un texto traducido"
+"en varias líneas"
+
+#: .././MyApp/Resources/Strings.cs:25
+msgid "This is another"
+"text translated"
+"in different lines"
+msgstr "Este es otro"
+"texto traducido"
+"en varias líneas"
+
+#: ..\src\MyApp.Resources\Locale\Strings.cs:26
+msgid "Pending translation"
+msgstr ""
