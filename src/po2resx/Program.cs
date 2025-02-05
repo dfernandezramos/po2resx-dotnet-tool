@@ -4,18 +4,19 @@ public class Program
 {
     static void Main(string[] args)
     {
+        if (args.Length == 1 && (args[0] == "-h" || args[0] == "--help" || args[0] == "/h" || args[0] == "/help"))
+        {
+            HelpWriter help = new();
+            help.Write();
+            return;
+        }
+
         if (args.Length != 2)
         {
             Console.WriteLine("Usage: po2resx <input.po/pot> <output.resx>");
             return;
         }
 
-        if (args[0] == "-h" || args[0] == "--help" || args[0] == "/h" || args[0] == "/help")
-        {
-            HelpWriter help = new();
-            help.Write();
-            return;
-        }
 
         string inputFilePath = args[0];
         string outputFilePath = args[1];
